@@ -29,12 +29,15 @@ anton.oden@outlook.com
     One problem for IoT end devices that could be running on battery is that WiFi in its aim to give the user high data rate is power consuming. WiFi is designed for high bandwidth or range that results in higher power consumption and for this reasons, new standards has been introduced to IEEE 802 family. 
     \newline\newline
     IEEE 802.15.4, which goes under the name Low-Rate Wireless Personal Area Network (LR-WPAN) is written with low power consumption in mind. The standard is grandfather of protocols such as Zigbee, 6LoWPAN, Thread, SNAP etc. Zigbee was first drafted 2004 and has became famous for usage in smart home implementations. It communicates at the 2400-2483MHz, which is same as WiFi. Also 868-868MHz in Europe and 902-928MHz in North America. Why the split between europe and north america may be Europe having more military applications communicating on 902-928MHz bandwidth \cite{ISM-bandEUR}. Getting the extra communication spectrums makes it easier for the protocol to communicate in highly density Wifi areas. 
+    \begin{figure}
+        \includegraphics[width=\columnwidth]{ISM-band.png} 
+        \caption{ISM-band frequency limits from \cite{ISM-band1}}
+        \label{fig1:ISM-band frequency limits}   
+    \end{figure}
+    \ref{fig1:ISM-band frequency limits}
+    Units within a zigbee network are categoriesed into three types. Coordinator, routers and end devices. The routers could be and often are an end device at the same time. The routers extend the physical range of the network and makes the network reliability as if one router goes offline the network so communication is not broken. This presupposes that end devices has more than one router in reachable range that can reach other parts of the network. The term mesh network is coined describing a zigbee network thought the network could also be structured in a star or tree topology also. "Mesh network: This is a network in which the routing of messages is performed as a decentrilized, cooperative proces involving many peer devices routing on each other's behalf." \cite{ZigbeeSpec}. So the routing devices are enabler of mesh network. The coordinator is only one within the personal area network and it is responsible of adding and decoupling devices to the network and the coordinator must be a fully functional device. End devices are all the things we want to connect in our IoT, usually a sensor/measuring instrument or some kind of actuator. 
     \newline\newline
-    Units within a zigbee network are categoriesed into three types. Coordinator, routers and end devices. The routers could be and often are an end device at the same time. Coordinator is only one within the local mesh network.  
-
-    \subsection{Mesh network}
-    Mesh network is a term often used when disuccsing zigbee and other LR-WPAN networks and what is meant by it is that the nodes aren't dependent on only As the end nodes could act as routers the area that could be  
-
+    To add functionality to the network another protocol is needed on top of Zigbee, as Zigbee is used for the communication. The most famous protocol for this is Message Queue Telemetry Transport (MQTT). MQTT filters all messages in a publish/subscribe manor. So MQTT terminology divide the network up in MQTT broker and MQTT clients, where the MQTT broker serves at the central hub in the messaging system. All clients connected to the MQTT broker published messages to the broker, all published messages are labeled with a topic (usally friendly devicename for sensor IoT devices). All clients in the MQTT network can subscribe to specified published topics. So for example if an IRsensor send/publish a message with topic "AwesomeRobotSolutionIRSensor", all clients that are subscribing to topic "AwesomeRobotSolutionIRSensor" will recieve the published message via the MQTT broker.       
     \section{The Challenges of Smart Home Networking}
 
     \section{Why Combine MQTT, Zigbee, and LoRa?}
